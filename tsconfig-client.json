@@ -1,0 +1,13 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "declaration": false,
+        "sourceMap": true,
+        "module": "amd",
+        "outDir": "dist/client",
+        "rootDir": "sources/lib"
+    },
+    "include": [
+        "sources/**/lib/index.ts"
+    ]
+}
