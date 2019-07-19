@@ -114,7 +114,7 @@ var Index = /** @class */ (function (_super) {
      */
     Index.prototype.loadHeadlines = function () {
         return this
-            .request('_' + Index.FILE_EXTENSION)
+            .request('index' + Index.FILE_EXTENSION)
             .then(function (response) {
             if (response instanceof Error ||
                 response.serverStatus >= 400) {

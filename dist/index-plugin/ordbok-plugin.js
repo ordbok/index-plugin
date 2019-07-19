@@ -4,7 +4,6 @@
 /* Licensed under the MIT License. See the LICENSE file in the project root. */
 /*---------------------------------------------------------------------------*/
 Object.defineProperty(exports, "__esModule", { value: true });
-var FS = require("fs");
 var Path = require("path");
 var core_1 = require("@ordbok/core");
 var plugin_1 = require("@ordbok/core/dist/plugin");
@@ -46,14 +45,8 @@ var IndexPlugin = /** @class */ (function () {
         var headlineKeys = Object.keys(indexes);
         var targetFolder = this._targetFolder;
         var filePath;
-        filePath = Path.join(targetFolder, '_') + lib_1.Index.FILE_EXTENSION;
-        plugin_1.PluginUtilities.makeFilePath(filePath);
-        FS.writeFileSync(filePath, lib_1.Index.stringifyHeadlines(headlineKeys.map(function (headlineKey) { return indexes[headlineKey].headline; })));
-        headlineKeys.forEach(function (headline) {
-            filePath = Path.join(targetFolder, headline) + lib_1.Index.FILE_EXTENSION;
-            plugin_1.PluginUtilities.makeFilePath(filePath);
-            FS.writeFileSync(filePath, lib_1.Index.stringify(indexes[headline].fileIndex));
-        });
+        plugin_1.PluginUtilities.writeFileSync((Path.join(targetFolder, 'index') + lib_1.Index.FILE_EXTENSION), lib_1.Index.stringifyHeadlines(headlineKeys.map(function (headlineKey) { return indexes[headlineKey].headline; })));
+        headlineKeys.forEach(function (headline) { return plugin_1.PluginUtilities.writeFileSync((Path.join(targetFolder, headline) + lib_1.Index.FILE_EXTENSION), lib_1.Index.stringify(indexes[headline].fileIndex)); });
     };
     /**
      * Gets called before the assembling begins.

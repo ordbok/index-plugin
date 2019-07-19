@@ -155,7 +155,7 @@ export class Index extends Ajax {
     public loadHeadlines (): Promise<Array<string>> {
 
         return this
-            .request('_' + Index.FILE_EXTENSION)
+            .request('index' + Index.FILE_EXTENSION)
             .then(response => {
 
                 if (response instanceof Error ||

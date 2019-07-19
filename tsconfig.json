@@ -2,7 +2,6 @@
     "compilerOptions": {
         "declaration": true,
         "strict": true,
-        "stripInternal": true,
         "module": "commonjs",
         "moduleResolution": "node",
         "outDir": "dist",

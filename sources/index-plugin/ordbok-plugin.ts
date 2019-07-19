@@ -3,7 +3,6 @@
 /* Licensed under the MIT License. See the LICENSE file in the project root. */
 /*---------------------------------------------------------------------------*/
 
-import * as FS from 'fs';
 import * as Path from 'path';
 import { IMarkdownPage, Utilities } from '@ordbok/core';
 import { IPlugin, PluginUtilities } from '@ordbok/core/dist/plugin';
@@ -95,28 +94,17 @@ export class IndexPlugin implements IPlugin {
 
         let filePath: string;
 
-        filePath = Path.join(targetFolder, '_') + Index.FILE_EXTENSION;
-
-        PluginUtilities.makeFilePath(filePath);
-
-        FS.writeFileSync(
-            filePath,
+        PluginUtilities.writeFileSync(
+            (Path.join(targetFolder, 'index') + Index.FILE_EXTENSION),
             Index.stringifyHeadlines(
                 headlineKeys.map(headlineKey => indexes[headlineKey].headline)
             )
         );
 
-        headlineKeys.forEach(headline => {
-
-            filePath = Path.join(targetFolder, headline) + Index.FILE_EXTENSION;
-
-            PluginUtilities.makeFilePath(filePath);
-
-            FS.writeFileSync(
-                filePath,
-                Index.stringify(indexes[headline].fileIndex)
-            );
-        });
+        headlineKeys.forEach(headline => PluginUtilities.writeFileSync(
+            (Path.join(targetFolder, headline) + Index.FILE_EXTENSION),
+            Index.stringify(indexes[headline].fileIndex)
+        ));
     }
 
     /**
