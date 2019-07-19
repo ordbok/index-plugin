@@ -155,7 +155,7 @@ export class Index extends Ajax {
     public loadHeadlines (): Promise<Array<string>> {
 
         return this
-            .request(Index.SUBFOLDER + '_' + Index.FILE_EXTENSION)
+            .request('_' + Index.FILE_EXTENSION)
             .then(response => {
 
                 if (response instanceof Error ||
@@ -177,7 +177,7 @@ export class Index extends Ajax {
     public loadFileIndex (headlineKey: string): Promise<IFileIndex> {
 
         return this
-            .request(Index.SUBFOLDER + Utilities.getKey(headlineKey) + Index.FILE_EXTENSION)
+            .request(Utilities.getKey(headlineKey) + Index.FILE_EXTENSION)
             .then(response => {
 
                 if (response instanceof Error ||

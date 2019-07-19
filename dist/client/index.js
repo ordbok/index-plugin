@@ -114,7 +114,7 @@ define(["require", "exports", "@ordbok/core"], function (require, exports, core_
          */
         Index.prototype.loadHeadlines = function () {
             return this
-                .request(Index.SUBFOLDER + '_' + Index.FILE_EXTENSION)
+                .request('_' + Index.FILE_EXTENSION)
                 .then(function (response) {
                 if (response instanceof Error ||
                     response.serverStatus >= 400) {
@@ -131,7 +131,7 @@ define(["require", "exports", "@ordbok/core"], function (require, exports, core_
          */
         Index.prototype.loadFileIndex = function (headlineKey) {
             return this
-                .request(Index.SUBFOLDER + core_1.Utilities.getKey(headlineKey) + Index.FILE_EXTENSION)
+                .request(core_1.Utilities.getKey(headlineKey) + Index.FILE_EXTENSION)
                 .then(function (response) {
                 if (response instanceof Error ||
                     response.serverStatus >= 400) {
