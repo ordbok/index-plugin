@@ -5,8 +5,13 @@
     exclude: [
         "@ordbok/core"
     ],
-    paths: {
-        "@ordbok/core": "node_modules/@ordbok/core/dist/client",
-        "@ordbok/index-plugin": "dist/client/index"
-    }
+    packages: [{
+        name: "@ordbok/core",
+        main: "index",
+        location: 'node_modules/@ordbok/core/dist/client'
+    }, {
+        name: "@ordbok/index-plugin",
+        main: "index",
+        location: 'dist/client'
+    }]
 })
