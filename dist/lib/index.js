@@ -24,7 +24,7 @@ var core_1 = require("@ordbok/core");
  *
  * */
 var LINE_SEPARATOR = '\n';
-var PAIR_SEPARATOR = '\t';
+var PAIR_SEPARATOR = ':';
 /* *
  *
  *  Classes

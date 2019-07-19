@@ -24,7 +24,7 @@ define(["require", "exports", "@ordbok/core"], function (require, exports, core_
      *
      * */
     var LINE_SEPARATOR = '\n';
-    var PAIR_SEPARATOR = '\t';
+    var PAIR_SEPARATOR = ':';
     /* *
      *
      *  Classes

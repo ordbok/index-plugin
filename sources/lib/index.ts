@@ -13,7 +13,7 @@ import { Ajax, Utilities } from '@ordbok/core';
 
 const LINE_SEPARATOR = '\n';
 
-const PAIR_SEPARATOR = '\t';
+const PAIR_SEPARATOR = ':';
 
 /* *
  *
