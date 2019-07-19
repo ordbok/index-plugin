@@ -53,7 +53,7 @@ export class Index extends Ajax {
     /**
      * Subfolder of index files
      */
-    public static readonly SUBFOLDER = 'index';
+    public static readonly SUBFOLDER = 'index/';
 
     /* *
      *
@@ -140,7 +140,7 @@ export class Index extends Ajax {
      */
     public constructor (baseUrl?: string, cacheTimeout?: number, responseTimeout?: number) {
 
-        super((baseUrl || '') + '/' + Index.SUBFOLDER, cacheTimeout, responseTimeout);
+        super((baseUrl || '') + Index.SUBFOLDER, cacheTimeout, responseTimeout);
     }
 
     /* *
@@ -155,7 +155,7 @@ export class Index extends Ajax {
     public loadHeadlines (): Promise<Array<string>> {
 
         return this
-            .request(Index.SUBFOLDER + '/' + '_' + Index.FILE_EXTENSION)
+            .request(Index.SUBFOLDER + '_' + Index.FILE_EXTENSION)
             .then(response => {
 
                 if (response instanceof Error ||
@@ -177,7 +177,7 @@ export class Index extends Ajax {
     public loadFileIndex (headlineKey: string): Promise<IFileIndex> {
 
         return this
-            .request(Index.SUBFOLDER + '/' + Utilities.getKey(headlineKey) + Index.FILE_EXTENSION)
+            .request(Index.SUBFOLDER + Utilities.getKey(headlineKey) + Index.FILE_EXTENSION)
             .then(response => {
 
                 if (response instanceof Error ||

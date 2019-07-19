@@ -16,7 +16,7 @@ export declare class Index extends Ajax {
     /**
      * Subfolder of index files
      */
-    static readonly SUBFOLDER = "index";
+    static readonly SUBFOLDER = "index/";
     /**
      * Converts a text into a file index.
      *

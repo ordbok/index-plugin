@@ -53,7 +53,7 @@ var Index = /** @class */ (function (_super) {
      *        Time in milliseconds to wait for a server response
      */
     function Index(baseUrl, cacheTimeout, responseTimeout) {
-        return _super.call(this, (baseUrl || '') + '/' + Index.SUBFOLDER, cacheTimeout, responseTimeout) || this;
+        return _super.call(this, (baseUrl || '') + Index.SUBFOLDER, cacheTimeout, responseTimeout) || this;
     }
     /* *
      *
@@ -114,7 +114,7 @@ var Index = /** @class */ (function (_super) {
      */
     Index.prototype.loadHeadlines = function () {
         return this
-            .request(Index.SUBFOLDER + '/' + '_' + Index.FILE_EXTENSION)
+            .request(Index.SUBFOLDER + '_' + Index.FILE_EXTENSION)
             .then(function (response) {
             if (response instanceof Error ||
                 response.serverStatus >= 400) {
@@ -131,7 +131,7 @@ var Index = /** @class */ (function (_super) {
      */
     Index.prototype.loadFileIndex = function (headlineKey) {
         return this
-            .request(Index.SUBFOLDER + '/' + core_1.Utilities.getKey(headlineKey) + Index.FILE_EXTENSION)
+            .request(Index.SUBFOLDER + core_1.Utilities.getKey(headlineKey) + Index.FILE_EXTENSION)
             .then(function (response) {
             if (response instanceof Error ||
                 response.serverStatus >= 400) {
@@ -156,7 +156,7 @@ var Index = /** @class */ (function (_super) {
     /**
      * Subfolder of index files
      */
-    Index.SUBFOLDER = 'index';
+    Index.SUBFOLDER = 'index/';
     return Index;
 }(core_1.Ajax));
 exports.Index = Index;
