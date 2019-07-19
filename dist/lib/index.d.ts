@@ -58,8 +58,8 @@ export declare class Index extends Ajax {
     /**
      * Loads an index file from the server.
      *
-     * @param headlineKey
-     *        Headline key of the index
+     * @param headline
+     *        Headline of the index
      */
-    loadFileIndex(headlineKey: string): Promise<IFileIndex>;
+    loadFileIndex(headline: string): Promise<IFileIndex>;
 }

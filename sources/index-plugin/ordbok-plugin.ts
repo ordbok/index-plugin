@@ -16,10 +16,18 @@ import { IFileIndex, Index } from '../lib';
  * */
 
 /**
+ * Headline entry
+ */
+interface IHeadlineEntry {
+    headline: string;
+    fileIndex: IFileIndex;
+}
+
+/**
  * Headline index with file indexes
  */
 interface IHeadlineIndex {
-    [headline: string]: IFileIndex;
+    [headlineKey: string]: IHeadlineEntry;
 }
 
 /* *
@@ -81,7 +89,7 @@ export class IndexPlugin implements IPlugin {
             return;
         }
 
-        const headlines = Object.keys(indexes).map(Utilities.getKey);
+        const headlineKeys = Object.keys(indexes);
 
         const targetFolder = this._targetFolder;
 
@@ -91,15 +99,23 @@ export class IndexPlugin implements IPlugin {
 
         PluginUtilities.makeFilePath(filePath);
 
-        FS.writeFileSync(filePath, Index.stringifyHeadlines(headlines));
+        FS.writeFileSync(
+            filePath,
+            Index.stringifyHeadlines(
+                headlineKeys.map(headlineKey => indexes[headlineKey].headline)
+            )
+        );
 
-        headlines.forEach(headline => {
+        headlineKeys.forEach(headline => {
 
             filePath = Path.join(targetFolder, headline) + Index.FILE_EXTENSION;
 
             PluginUtilities.makeFilePath(filePath);
 
-            FS.writeFileSync(filePath, Index.stringify(indexes[headline]));
+            FS.writeFileSync(
+                filePath,
+                Index.stringify(indexes[headline].fileIndex)
+            );
         });
     }
 
@@ -147,20 +163,24 @@ export class IndexPlugin implements IPlugin {
         const targetFilePrefix = targetFile.substr(0, lastDashPosition);
         const targetFileSuffix = parseInt(targetFile.substr(lastDashPosition + 1));
 
-        let fileIndex: IFileIndex;
+        let headlineEntry: IHeadlineEntry;
+        let headlineKey: string;
 
         Object
             .keys(markdownPage)
-            .map(Utilities.getKey)
             .forEach(headline => {
 
-                fileIndex = this._indexes[headline];
+                headlineKey = Utilities.getKey(headline);
+                headlineEntry = this._indexes[headlineKey];
 
-                if (!fileIndex) {
-                    fileIndex = this._indexes[headline] = {};
+                if (!headlineEntry) {
+                    headlineEntry = this._indexes[headlineKey] = {
+                        headline,
+                        fileIndex: {}
+                    };
                 }
 
-                fileIndex[targetFilePrefix] = targetFileSuffix;
+                headlineEntry.fileIndex[targetFilePrefix] = targetFileSuffix;
             });
     }
 }

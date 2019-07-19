@@ -171,13 +171,13 @@ export class Index extends Ajax {
     /**
      * Loads an index file from the server.
      *
-     * @param headlineKey
-     *        Headline key of the index
+     * @param headline
+     *        Headline of the index
      */
-    public loadFileIndex (headlineKey: string): Promise<IFileIndex> {
+    public loadFileIndex (headline: string): Promise<IFileIndex> {
 
         return this
-            .request(Utilities.getKey(headlineKey) + Index.FILE_EXTENSION)
+            .request(Utilities.getKey(headline) + Index.FILE_EXTENSION)
             .then(response => {
 
                 if (response instanceof Error ||

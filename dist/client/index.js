@@ -126,12 +126,12 @@ define(["require", "exports", "@ordbok/core"], function (require, exports, core_
         /**
          * Loads an index file from the server.
          *
-         * @param headlineKey
-         *        Headline key of the index
+         * @param headline
+         *        Headline of the index
          */
-        Index.prototype.loadFileIndex = function (headlineKey) {
+        Index.prototype.loadFileIndex = function (headline) {
             return this
-                .request(core_1.Utilities.getKey(headlineKey) + Index.FILE_EXTENSION)
+                .request(core_1.Utilities.getKey(headline) + Index.FILE_EXTENSION)
                 .then(function (response) {
                 if (response instanceof Error ||
                     response.serverStatus >= 400) {
