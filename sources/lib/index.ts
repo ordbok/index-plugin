@@ -22,7 +22,7 @@ const PAIR_SEPARATOR = '\t';
  * */
 
 /**
- * File index with page counter
+ * File index with highest page index
  */
 export interface IFileIndex {
     [file: string]: number;
@@ -150,7 +150,7 @@ export class Index extends Ajax {
      * */
 
     /**
-     * Loads the headline index from the server.
+     * Loads the index of headline keys from the server.
      */
     public loadHeadlines (): Promise<Array<string>> {
 
@@ -169,15 +169,15 @@ export class Index extends Ajax {
     }
 
     /**
-     * Loads a index file from the server.
+     * Loads an index file from the server.
      *
-     * @param headline
-     *        Headline of the index
+     * @param headlineKey
+     *        Headline key of the index
      */
-    public loadFileIndex (headline: string): Promise<IFileIndex> {
+    public loadFileIndex (headlineKey: string): Promise<IFileIndex> {
 
         return this
-            .request(Index.SUBFOLDER + '/' + Utilities.getKey(headline) + Index.FILE_EXTENSION)
+            .request(Index.SUBFOLDER + '/' + Utilities.getKey(headlineKey) + Index.FILE_EXTENSION)
             .then(response => {
 
                 if (response instanceof Error ||

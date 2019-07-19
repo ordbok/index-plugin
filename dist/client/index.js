@@ -110,7 +110,7 @@ define(["require", "exports", "@ordbok/core"], function (require, exports, core_
          *
          * */
         /**
-         * Loads the headline index from the server.
+         * Loads the index of headline keys from the server.
          */
         Index.prototype.loadHeadlines = function () {
             return this
@@ -124,14 +124,14 @@ define(["require", "exports", "@ordbok/core"], function (require, exports, core_
             });
         };
         /**
-         * Loads a index file from the server.
+         * Loads an index file from the server.
          *
-         * @param headline
-         *        Headline of the index
+         * @param headlineKey
+         *        Headline key of the index
          */
-        Index.prototype.loadFileIndex = function (headline) {
+        Index.prototype.loadFileIndex = function (headlineKey) {
             return this
-                .request(Index.SUBFOLDER + '/' + core_1.Utilities.getKey(headline) + Index.FILE_EXTENSION)
+                .request(Index.SUBFOLDER + '/' + core_1.Utilities.getKey(headlineKey) + Index.FILE_EXTENSION)
                 .then(function (response) {
                 if (response instanceof Error ||
                     response.serverStatus >= 400) {
