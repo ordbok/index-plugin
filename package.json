@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "@ordbok/index-plugin",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"author": "ORDBOK contributors",
 	"license": "MIT",
 	"description": "Dictionary plugin to create a file index",
@@ -15,8 +15,8 @@
 	"devDependencies": {
 		"@ordbok/core": "https://github.com/ordbok/core#v0.0.4",
 		"@types/node": "^10.0.0",
-		"requirejs": "^2.3.6",
-		"typescript": "^3.4.5"
+		"requirejs": "2.3.6",
+		"typescript": "3.4.5"
 	},
 	"engines": {
 		"node": ">=10.0.0"
