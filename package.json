@@ -32,7 +32,7 @@
 		"build": "npm run clean && npm run build-1 && npm run build-2 && npm run build-3",
 		"build-1": "tsc --build tsconfig.json tsconfig-client.json",
 		"build-2": "r_js -o rjsconfig-client.js",
-		"build-3": "typedoc --out docs --tsconfig tsconfig.json",
+		"build-3": "typedoc --out docs --tsconfig tsconfig-client.json",
 		"clean": "rm -rf dist",
 		"release": "npm publish --access=public --tag next",
 		"release-as-stable": "npm publish --access=public",
