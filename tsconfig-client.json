@@ -9,5 +9,7 @@
     },
     "include": [
         "sources/**/lib/index.ts"
+    ],
+    "files": [
     ]
 }

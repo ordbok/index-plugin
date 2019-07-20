@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Path = require("path");
 var core_1 = require("@ordbok/core");
 var plugin_1 = require("@ordbok/core/dist/plugin");
-var lib_1 = require("../lib");
+var lib_1 = require("./lib");
 /* *
  *
  *  Classes

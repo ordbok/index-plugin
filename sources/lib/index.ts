@@ -127,7 +127,7 @@ export class Index extends Ajax {
      * */
 
     /**
-     * Creates a new managed inex instance.
+     * Creates a new managed index instance.
      *
      * @param baseUrl
      *        Base URL of the server

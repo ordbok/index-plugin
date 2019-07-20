@@ -13,9 +13,10 @@
 	"homepage": "https://github.com/ordbok/index-plugin#readme",
 	"repository": "https://github.com/ordbok/index-plugin.git",
 	"devDependencies": {
-		"@ordbok/core": "https://github.com/ordbok/core#v0.0.4",
+		"@ordbok/core": "https://github.com/ordbok/core#v0.0.5",
 		"@types/node": "^10.0.0",
 		"requirejs": "2.3.6",
+		"typedoc": "0.14.2",
 		"typescript": "3.4.5"
 	},
 	"engines": {
@@ -28,10 +29,13 @@
 	],
 	"main": "dist/lib/index.js",
 	"scripts": {
-		"build": "npm run clean && npm run build-1 && npm run build-2",
+		"build": "npm run clean && npm run build-1 && npm run build-2 && npm run build-3",
 		"build-1": "tsc --build tsconfig.json tsconfig-client.json",
 		"build-2": "r_js -o rjsconfig-client.js",
+		"build-3": "typedoc --out docs --tsconfig tsconfig.json",
 		"clean": "rm -rf dist",
+		"release": "npm publish --access=public --tag next",
+		"release-as-stable": "npm publish --access=public",
 		"watch": "tsc --build tsconfig.json --watch"
 	},
 	"types": "dist/lib/index.d.ts"

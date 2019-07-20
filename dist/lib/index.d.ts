@@ -39,7 +39,7 @@ export declare class Index extends Ajax {
      */
     static stringifyHeadlines(headlines: Array<string>): string;
     /**
-     * Creates a new managed inex instance.
+     * Creates a new managed index instance.
      *
      * @param baseUrl
      *        Base URL of the server

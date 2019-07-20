@@ -1,18 +1,18 @@
-ORDBOK index plugin
+ORDBOK Index Plugin
 ===================
 
 Index files by the assembler and creates for each headline a separate index file.
 
 
 
-Index structure
+Index Structure
 ---------------
 
 Each index file contains all related files with their highest page counter.
 
 
 
-Plugin usage
+Plugin Usage
 ------------
 
 You have to create a `ordbok.json` configuration file in the folder in which you will run the ordbok

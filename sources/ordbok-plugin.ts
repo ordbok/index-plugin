@@ -6,7 +6,7 @@
 import * as Path from 'path';
 import { IMarkdownPage, Utilities } from '@ordbok/core';
 import { IPlugin, PluginUtilities } from '@ordbok/core/dist/plugin';
-import { IFileIndex, Index } from '../lib';
+import { IFileIndex, Index } from './lib';
 
 /* *
  *
