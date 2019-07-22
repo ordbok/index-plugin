@@ -3,11 +3,10 @@
 /* Licensed under the MIT License. See the LICENSE file in the project root. */
 /*---------------------------------------------------------------------------*/
 
-import * as FS from 'fs';
 import * as Path from 'path';
 import { IMarkdownPage, Utilities } from '@ordbok/core';
 import { IPlugin, PluginUtilities } from '@ordbok/core/dist/plugin';
-import { IFileIndex, Index } from '../lib';
+import { IFileIndex, Index } from './lib';
 
 /* *
  *
@@ -16,10 +15,18 @@ import { IFileIndex, Index } from '../lib';
  * */
 
 /**
+ * Headline entry
+ */
+interface IHeadlineEntry {
+    headline: string;
+    fileIndex: IFileIndex;
+}
+
+/**
  * Headline index with file indexes
  */
 interface IHeadlineIndex {
-    [headline: string]: IFileIndex;
+    [headlineKey: string]: IHeadlineEntry;
 }
 
 /* *
@@ -81,26 +88,23 @@ export class IndexPlugin implements IPlugin {
             return;
         }
 
-        const headlines = Object.keys(indexes).map(Utilities.getKey);
+        const headlineKeys = Object.keys(indexes);
 
         const targetFolder = this._targetFolder;
 
         let filePath: string;
 
-        filePath = Path.join(targetFolder, '_') + Index.FILE_EXTENSION;
+        PluginUtilities.writeFileSync(
+            (Path.join(targetFolder, 'index') + Index.FILE_EXTENSION),
+            Index.stringifyHeadlines(
+                headlineKeys.map(headlineKey => indexes[headlineKey].headline)
+            )
+        );
 
-        PluginUtilities.makeFilePath(filePath);
-
-        FS.writeFileSync(filePath, Index.stringifyHeadlines(headlines));
-
-        headlines.forEach(headline => {
-
-            filePath = Path.join(targetFolder, headline) + Index.FILE_EXTENSION;
-
-            PluginUtilities.makeFilePath(filePath);
-
-            FS.writeFileSync(filePath, Index.stringify(indexes[headline]));
-        });
+        headlineKeys.forEach(headline => PluginUtilities.writeFileSync(
+            (Path.join(targetFolder, headline) + Index.FILE_EXTENSION),
+            Index.stringify(indexes[headline].fileIndex)
+        ));
     }
 
     /**
@@ -147,20 +151,24 @@ export class IndexPlugin implements IPlugin {
         const targetFilePrefix = targetFile.substr(0, lastDashPosition);
         const targetFileSuffix = parseInt(targetFile.substr(lastDashPosition + 1));
 
-        let fileIndex: IFileIndex;
+        let headlineEntry: IHeadlineEntry;
+        let headlineKey: string;
 
         Object
             .keys(markdownPage)
-            .map(Utilities.getKey)
             .forEach(headline => {
 
-                fileIndex = this._indexes[headline];
+                headlineKey = Utilities.getKey(headline);
+                headlineEntry = this._indexes[headlineKey];
 
-                if (!fileIndex) {
-                    fileIndex = this._indexes[headline] = {};
+                if (!headlineEntry) {
+                    headlineEntry = this._indexes[headlineKey] = {
+                        headline,
+                        fileIndex: {}
+                    };
                 }
 
-                fileIndex[targetFilePrefix] = targetFileSuffix;
+                headlineEntry.fileIndex[targetFilePrefix] = targetFileSuffix;
             });
     }
 }

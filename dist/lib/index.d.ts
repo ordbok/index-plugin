@@ -1,6 +1,6 @@
 import { Ajax } from '@ordbok/core';
 /**
- * File index with page counter
+ * File index with highest page index
  */
 export interface IFileIndex {
     [file: string]: number;
@@ -16,7 +16,7 @@ export declare class Index extends Ajax {
     /**
      * Subfolder of index files
      */
-    static readonly SUBFOLDER = "index";
+    static readonly SUBFOLDER = "index/";
     /**
      * Converts a text into a file index.
      *
@@ -39,7 +39,7 @@ export declare class Index extends Ajax {
      */
     static stringifyHeadlines(headlines: Array<string>): string;
     /**
-     * Creates a new managed inex instance.
+     * Creates a new managed index instance.
      *
      * @param baseUrl
      *        Base URL of the server
@@ -52,11 +52,11 @@ export declare class Index extends Ajax {
      */
     constructor(baseUrl?: string, cacheTimeout?: number, responseTimeout?: number);
     /**
-     * Loads the headline index from the server.
+     * Loads the index of headline keys from the server.
      */
     loadHeadlines(): Promise<Array<string>>;
     /**
-     * Loads a index file from the server.
+     * Loads an index file from the server.
      *
      * @param headline
      *        Headline of the index

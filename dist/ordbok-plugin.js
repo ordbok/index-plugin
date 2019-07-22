@@ -4,11 +4,10 @@
 /* Licensed under the MIT License. See the LICENSE file in the project root. */
 /*---------------------------------------------------------------------------*/
 Object.defineProperty(exports, "__esModule", { value: true });
-var FS = require("fs");
 var Path = require("path");
 var core_1 = require("@ordbok/core");
 var plugin_1 = require("@ordbok/core/dist/plugin");
-var lib_1 = require("../lib");
+var lib_1 = require("./lib");
 /* *
  *
  *  Classes
@@ -43,17 +42,11 @@ var IndexPlugin = /** @class */ (function () {
         if (Object.keys(indexes).length === 0) {
             return;
         }
-        var headlines = Object.keys(indexes).map(core_1.Utilities.getKey);
+        var headlineKeys = Object.keys(indexes);
         var targetFolder = this._targetFolder;
         var filePath;
-        filePath = Path.join(targetFolder, '_') + lib_1.Index.FILE_EXTENSION;
-        plugin_1.PluginUtilities.makeFilePath(filePath);
-        FS.writeFileSync(filePath, lib_1.Index.stringifyHeadlines(headlines));
-        headlines.forEach(function (headline) {
-            filePath = Path.join(targetFolder, headline) + lib_1.Index.FILE_EXTENSION;
-            plugin_1.PluginUtilities.makeFilePath(filePath);
-            FS.writeFileSync(filePath, lib_1.Index.stringify(indexes[headline]));
-        });
+        plugin_1.PluginUtilities.writeFileSync((Path.join(targetFolder, 'index') + lib_1.Index.FILE_EXTENSION), lib_1.Index.stringifyHeadlines(headlineKeys.map(function (headlineKey) { return indexes[headlineKey].headline; })));
+        headlineKeys.forEach(function (headline) { return plugin_1.PluginUtilities.writeFileSync((Path.join(targetFolder, headline) + lib_1.Index.FILE_EXTENSION), lib_1.Index.stringify(indexes[headline].fileIndex)); });
     };
     /**
      * Gets called before the assembling begins.
@@ -91,16 +84,20 @@ var IndexPlugin = /** @class */ (function () {
         }
         var targetFilePrefix = targetFile.substr(0, lastDashPosition);
         var targetFileSuffix = parseInt(targetFile.substr(lastDashPosition + 1));
-        var fileIndex;
+        var headlineEntry;
+        var headlineKey;
         Object
             .keys(markdownPage)
-            .map(core_1.Utilities.getKey)
             .forEach(function (headline) {
-            fileIndex = _this._indexes[headline];
-            if (!fileIndex) {
-                fileIndex = _this._indexes[headline] = {};
+            headlineKey = core_1.Utilities.getKey(headline);
+            headlineEntry = _this._indexes[headlineKey];
+            if (!headlineEntry) {
+                headlineEntry = _this._indexes[headlineKey] = {
+                    headline: headline,
+                    fileIndex: {}
+                };
             }
-            fileIndex[targetFilePrefix] = targetFileSuffix;
+            headlineEntry.fileIndex[targetFilePrefix] = targetFileSuffix;
         });
     };
     return IndexPlugin;

@@ -13,7 +13,7 @@ import { Ajax, Utilities } from '@ordbok/core';
 
 const LINE_SEPARATOR = '\n';
 
-const PAIR_SEPARATOR = '\t';
+const PAIR_SEPARATOR = ':';
 
 /* *
  *
@@ -22,7 +22,7 @@ const PAIR_SEPARATOR = '\t';
  * */
 
 /**
- * File index with page counter
+ * File index with highest page index
  */
 export interface IFileIndex {
     [file: string]: number;
@@ -53,7 +53,7 @@ export class Index extends Ajax {
     /**
      * Subfolder of index files
      */
-    public static readonly SUBFOLDER = 'index';
+    public static readonly SUBFOLDER = 'index/';
 
     /* *
      *
@@ -127,7 +127,7 @@ export class Index extends Ajax {
      * */
 
     /**
-     * Creates a new managed inex instance.
+     * Creates a new managed index instance.
      *
      * @param baseUrl
      *        Base URL of the server
@@ -140,7 +140,7 @@ export class Index extends Ajax {
      */
     public constructor (baseUrl?: string, cacheTimeout?: number, responseTimeout?: number) {
 
-        super((baseUrl || '') + '/' + Index.SUBFOLDER, cacheTimeout, responseTimeout);
+        super((baseUrl || '') + Index.SUBFOLDER, cacheTimeout, responseTimeout);
     }
 
     /* *
@@ -150,12 +150,12 @@ export class Index extends Ajax {
      * */
 
     /**
-     * Loads the headline index from the server.
+     * Loads the index of headline keys from the server.
      */
     public loadHeadlines (): Promise<Array<string>> {
 
         return this
-            .request(Index.SUBFOLDER + '/' + '_' + Index.FILE_EXTENSION)
+            .request('index' + Index.FILE_EXTENSION)
             .then(response => {
 
                 if (response instanceof Error ||
@@ -169,7 +169,7 @@ export class Index extends Ajax {
     }
 
     /**
-     * Loads a index file from the server.
+     * Loads an index file from the server.
      *
      * @param headline
      *        Headline of the index
@@ -177,7 +177,7 @@ export class Index extends Ajax {
     public loadFileIndex (headline: string): Promise<IFileIndex> {
 
         return this
-            .request(Index.SUBFOLDER + '/' + Utilities.getKey(headline) + Index.FILE_EXTENSION)
+            .request(Utilities.getKey(headline) + Index.FILE_EXTENSION)
             .then(response => {
 
                 if (response instanceof Error ||

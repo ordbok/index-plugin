@@ -24,7 +24,7 @@ var core_1 = require("@ordbok/core");
  *
  * */
 var LINE_SEPARATOR = '\n';
-var PAIR_SEPARATOR = '\t';
+var PAIR_SEPARATOR = ':';
 /* *
  *
  *  Classes
@@ -41,7 +41,7 @@ var Index = /** @class */ (function (_super) {
      *
      * */
     /**
-     * Creates a new managed inex instance.
+     * Creates a new managed index instance.
      *
      * @param baseUrl
      *        Base URL of the server
@@ -53,7 +53,7 @@ var Index = /** @class */ (function (_super) {
      *        Time in milliseconds to wait for a server response
      */
     function Index(baseUrl, cacheTimeout, responseTimeout) {
-        return _super.call(this, (baseUrl || '') + '/' + Index.SUBFOLDER, cacheTimeout, responseTimeout) || this;
+        return _super.call(this, (baseUrl || '') + Index.SUBFOLDER, cacheTimeout, responseTimeout) || this;
     }
     /* *
      *
@@ -110,11 +110,11 @@ var Index = /** @class */ (function (_super) {
      *
      * */
     /**
-     * Loads the headline index from the server.
+     * Loads the index of headline keys from the server.
      */
     Index.prototype.loadHeadlines = function () {
         return this
-            .request(Index.SUBFOLDER + '/' + '_' + Index.FILE_EXTENSION)
+            .request('index' + Index.FILE_EXTENSION)
             .then(function (response) {
             if (response instanceof Error ||
                 response.serverStatus >= 400) {
@@ -124,14 +124,14 @@ var Index = /** @class */ (function (_super) {
         });
     };
     /**
-     * Loads a index file from the server.
+     * Loads an index file from the server.
      *
      * @param headline
      *        Headline of the index
      */
     Index.prototype.loadFileIndex = function (headline) {
         return this
-            .request(Index.SUBFOLDER + '/' + core_1.Utilities.getKey(headline) + Index.FILE_EXTENSION)
+            .request(core_1.Utilities.getKey(headline) + Index.FILE_EXTENSION)
             .then(function (response) {
             if (response instanceof Error ||
                 response.serverStatus >= 400) {
@@ -156,7 +156,7 @@ var Index = /** @class */ (function (_super) {
     /**
      * Subfolder of index files
      */
-    Index.SUBFOLDER = 'index';
+    Index.SUBFOLDER = 'index/';
     return Index;
 }(core_1.Ajax));
 exports.Index = Index;
