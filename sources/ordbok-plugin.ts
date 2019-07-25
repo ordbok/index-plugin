@@ -4,8 +4,7 @@
 /*---------------------------------------------------------------------------*/
 
 import * as Path from 'path';
-import { IMarkdownPage, Utilities } from '@ordbok/core';
-import { IPlugin, PluginUtilities } from '@ordbok/core/dist/plugin';
+import { IMarkdownPage, Internals, IPlugin, Utilities } from '@ordbok/core/dist';
 import { IFileIndex, Index } from './lib';
 
 /* *
@@ -94,14 +93,14 @@ export class IndexPlugin implements IPlugin {
 
         let filePath: string;
 
-        PluginUtilities.writeFileSync(
+        Internals.writeFile(
             (Path.join(targetFolder, 'index') + Index.FILE_EXTENSION),
             Index.stringifyHeadlines(
                 headlineKeys.map(headlineKey => indexes[headlineKey].headline)
             )
         );
 
-        headlineKeys.forEach(headline => PluginUtilities.writeFileSync(
+        headlineKeys.forEach(headline => Internals.writeFile(
             (Path.join(targetFolder, headline) + Index.FILE_EXTENSION),
             Index.stringify(indexes[headline].fileIndex)
         ));

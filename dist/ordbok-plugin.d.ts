@@ -1,5 +1,4 @@
-import { IMarkdownPage } from '@ordbok/core';
-import { IPlugin } from '@ordbok/core/dist/plugin';
+import { IMarkdownPage, IPlugin } from '@ordbok/core/dist';
 /**
  * Plugin to create index files.
  */
