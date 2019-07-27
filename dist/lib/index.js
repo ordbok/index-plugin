@@ -20,13 +20,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@ordbok/core");
 /* *
  *
- *  Constants
- *
- * */
-var LINE_SEPARATOR = '\n';
-var PAIR_SEPARATOR = ':';
-/* *
- *
  *  Classes
  *
  * */
@@ -70,12 +63,12 @@ var Index = /** @class */ (function (_super) {
         var fileIndex = {};
         var pair;
         stringified
-            .split(LINE_SEPARATOR)
+            .split(core_1.Dictionary.LINE_SEPARATOR)
             .forEach(function (line) {
-            if (line.indexOf(PAIR_SEPARATOR) === -1) {
+            if (line.indexOf(core_1.Dictionary.PAIR_SEPARATOR) === -1) {
                 return;
             }
-            pair = line.split(PAIR_SEPARATOR);
+            pair = line.split(core_1.Dictionary.PAIR_SEPARATOR);
             if (pair.length < 2) {
                 return;
             }
@@ -92,8 +85,12 @@ var Index = /** @class */ (function (_super) {
     Index.stringify = function (fileIndex) {
         return Object
             .keys(fileIndex)
-            .map(function (fileTarget) { return (core_1.Utilities.getKey(fileTarget) + PAIR_SEPARATOR + fileIndex[fileTarget]); })
-            .join(LINE_SEPARATOR);
+            .map(function (fileTarget) {
+            return core_1.Utilities.getKey(fileTarget) +
+                core_1.Dictionary.PAIR_SEPARATOR +
+                fileIndex[fileTarget];
+        })
+            .join(core_1.Dictionary.LINE_SEPARATOR);
     };
     /**
      * Converts the headline index into a text.
@@ -102,7 +99,7 @@ var Index = /** @class */ (function (_super) {
      *        Headlines index
      */
     Index.stringifyHeadlines = function (headlines) {
-        return headlines.join(LINE_SEPARATOR);
+        return headlines.join(core_1.Dictionary.LINE_SEPARATOR);
     };
     /* *
      *
@@ -114,13 +111,13 @@ var Index = /** @class */ (function (_super) {
      */
     Index.prototype.loadHeadlines = function () {
         return this
-            .request('index' + Index.FILE_EXTENSION)
+            .request('index' + core_1.Dictionary.FILE_EXTENSION)
             .then(function (response) {
             if (response instanceof Error ||
                 response.serverStatus >= 400) {
                 throw new Error('HTTP ' + response.serverStatus);
             }
-            return response.result.split(LINE_SEPARATOR);
+            return response.result.split(core_1.Dictionary.LINE_SEPARATOR);
         });
     };
     /**
@@ -131,7 +128,7 @@ var Index = /** @class */ (function (_super) {
      */
     Index.prototype.loadFileIndex = function (headline) {
         return this
-            .request(core_1.Utilities.getKey(headline) + Index.FILE_EXTENSION)
+            .request(core_1.Utilities.getKey(headline) + core_1.Dictionary.FILE_EXTENSION)
             .then(function (response) {
             if (response instanceof Error ||
                 response.serverStatus >= 400) {
@@ -146,13 +143,9 @@ var Index = /** @class */ (function (_super) {
     };
     /* *
      *
-     *  Static Variables
+     *  Static Properties
      *
      * */
-    /**
-     * File extension of index files
-     */
-    Index.FILE_EXTENSION = '.txt';
     /**
      * Subfolder of index files
      */

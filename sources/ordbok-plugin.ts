@@ -4,8 +4,17 @@
 /*---------------------------------------------------------------------------*/
 
 import * as Path from 'path';
-import { IMarkdownPage, Internals, IPlugin, Utilities } from '@ordbok/core/dist';
-import { IFileIndex, Index } from './lib';
+import {
+    Dictionary,
+    IMarkdownPage,
+    Internals,
+    IPlugin,
+    Utilities
+} from '@ordbok/core/dist';
+import {
+    IFileIndex,
+    Index
+} from './lib';
 
 /* *
  *
@@ -94,14 +103,14 @@ export class IndexPlugin implements IPlugin {
         let filePath: string;
 
         Internals.writeFile(
-            (Path.join(targetFolder, 'index') + Index.FILE_EXTENSION),
+            (Path.join(targetFolder, 'index') + Dictionary.FILE_EXTENSION),
             Index.stringifyHeadlines(
                 headlineKeys.map(headlineKey => indexes[headlineKey].headline)
             )
         );
 
         headlineKeys.forEach(headline => Internals.writeFile(
-            (Path.join(targetFolder, headline) + Index.FILE_EXTENSION),
+            (Path.join(targetFolder, headline) + Dictionary.FILE_EXTENSION),
             Index.stringify(indexes[headline].fileIndex)
         ));
     }
@@ -141,7 +150,7 @@ export class IndexPlugin implements IPlugin {
 
         targetFile = Path.basename(targetFile);
 
-        const lastDashPosition = targetFile.lastIndexOf('-');
+        const lastDashPosition = targetFile.lastIndexOf(Dictionary.FILE_SEPARATOR);
 
         if (lastDashPosition === -1) {
             return;

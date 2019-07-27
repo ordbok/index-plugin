@@ -44,8 +44,8 @@ var IndexPlugin = /** @class */ (function () {
         var headlineKeys = Object.keys(indexes);
         var targetFolder = this._targetFolder;
         var filePath;
-        dist_1.Internals.writeFile((Path.join(targetFolder, 'index') + lib_1.Index.FILE_EXTENSION), lib_1.Index.stringifyHeadlines(headlineKeys.map(function (headlineKey) { return indexes[headlineKey].headline; })));
-        headlineKeys.forEach(function (headline) { return dist_1.Internals.writeFile((Path.join(targetFolder, headline) + lib_1.Index.FILE_EXTENSION), lib_1.Index.stringify(indexes[headline].fileIndex)); });
+        dist_1.Internals.writeFile((Path.join(targetFolder, 'index') + dist_1.Dictionary.FILE_EXTENSION), lib_1.Index.stringifyHeadlines(headlineKeys.map(function (headlineKey) { return indexes[headlineKey].headline; })));
+        headlineKeys.forEach(function (headline) { return dist_1.Internals.writeFile((Path.join(targetFolder, headline) + dist_1.Dictionary.FILE_EXTENSION), lib_1.Index.stringify(indexes[headline].fileIndex)); });
     };
     /**
      * Gets called before the assembling begins.
@@ -77,7 +77,7 @@ var IndexPlugin = /** @class */ (function () {
     IndexPlugin.prototype.onWriteFile = function (targetFile, markdownPage) {
         var _this = this;
         targetFile = Path.basename(targetFile);
-        var lastDashPosition = targetFile.lastIndexOf('-');
+        var lastDashPosition = targetFile.lastIndexOf(dist_1.Dictionary.FILE_SEPARATOR);
         if (lastDashPosition === -1) {
             return;
         }
