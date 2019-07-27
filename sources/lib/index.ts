@@ -3,7 +3,11 @@
 /* Licensed under the MIT License. See the LICENSE file in the project root. */
 /*---------------------------------------------------------------------------*/
 
-import { Ajax, Utilities, Dictionary } from '@ordbok/core';
+import {
+    Ajax,
+    Utilities,
+    Dictionary
+} from '@ordbok/core';
 
 /* *
  *

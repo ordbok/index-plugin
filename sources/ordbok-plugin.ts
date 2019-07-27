@@ -81,7 +81,7 @@ export class IndexPlugin implements IPlugin {
 
     /* *
      *
-     *  Functions
+     *  Events
      *
      * */
 
@@ -97,10 +97,7 @@ export class IndexPlugin implements IPlugin {
         }
 
         const headlineKeys = Object.keys(indexes);
-
         const targetFolder = this._targetFolder;
-
-        let filePath: string;
 
         Internals.writeFile(
             (Path.join(targetFolder, 'index') + Dictionary.FILE_EXTENSION),
@@ -127,14 +124,6 @@ export class IndexPlugin implements IPlugin {
     public onAssembling (sourceFolder: string, targetFolder: string): void {
 
         this._targetFolder = Path.join(targetFolder, Index.SUBFOLDER);
-    }
-
-    /**
-     * Gets called after a markdown file has been read.
-     */
-    public onReadFile (): void {
-
-        // nothing to do
     }
 
     /**

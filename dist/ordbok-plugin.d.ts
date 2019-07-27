@@ -30,10 +30,6 @@ export declare class IndexPlugin implements IPlugin {
      */
     onAssembling(sourceFolder: string, targetFolder: string): void;
     /**
-     * Gets called after a markdown file has been read.
-     */
-    onReadFile(): void;
-    /**
      * Gets called before a dictionary file will be written.
      *
      * @param targetFile
