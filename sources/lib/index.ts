@@ -129,9 +129,9 @@ export class Index extends Ajax {
      * @param responseTimeout
      *        Time in milliseconds to wait for a server response
      */
-    public constructor (baseUrl?: string, cacheTimeout?: number, responseTimeout?: number) {
+    public constructor (baseUrl: string = '', cacheTimeout?: number, responseTimeout?: number) {
 
-        super((baseUrl || '') + Index.SUBFOLDER, cacheTimeout, responseTimeout);
+        super((baseUrl + Index.SUBFOLDER), cacheTimeout, responseTimeout);
     }
 
     /* *

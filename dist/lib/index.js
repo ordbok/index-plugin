@@ -46,7 +46,8 @@ var Index = /** @class */ (function (_super) {
      *        Time in milliseconds to wait for a server response
      */
     function Index(baseUrl, cacheTimeout, responseTimeout) {
-        return _super.call(this, (baseUrl || '') + Index.SUBFOLDER, cacheTimeout, responseTimeout) || this;
+        if (baseUrl === void 0) { baseUrl = ''; }
+        return _super.call(this, (baseUrl + Index.SUBFOLDER), cacheTimeout, responseTimeout) || this;
     }
     /* *
      *
