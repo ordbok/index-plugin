@@ -13,7 +13,7 @@
 	"homepage": "https://github.com/ordbok/index-plugin#readme",
 	"repository": "https://github.com/ordbok/index-plugin.git",
 	"devDependencies": {
-		"@ordbok/core": "^0.0.6",
+		"@ordbok/core": "^0.0.7",
 		"@types/node": "^10.0.0",
 		"requirejs": "2.3.6",
 		"typedoc": "0.14.2",
@@ -32,7 +32,7 @@
 		"build": "npm run clean && npm run build-1 && npm run build-2 && npm run build-3",
 		"build-1": "tsc --build tsconfig.json tsconfig-client.json",
 		"build-2": "r_js -o rjsconfig-client.js",
-		"build-3": "typedoc --excludeExternals --excludeNotExported --excludePrivate --gitRevision master --mode file --name \"ORDBOK Index Plugin API\" --out docs --tsconfig tsconfig-client.json",
+		"build-3": "typedoc --excludeExternals --excludeNotExported --excludePrivate --excludeProtected --gitRevision master --mode file --name \"ORDBOK Index Plugin API\" --out docs --tsconfig tsconfig-client.json",
 		"clean": "rm -rf dist docs",
 		"release": "npm publish --access=public --tag next",
 		"release-as-stable": "npm publish --access=public",
