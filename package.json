@@ -13,7 +13,7 @@
 	"homepage": "https://github.com/ordbok/index-plugin#readme",
 	"repository": "https://github.com/ordbok/index-plugin.git",
 	"devDependencies": {
-		"@ordbok/core": "https://github.com/ordbok/core.git#v0.0.6",
+		"@ordbok/core": "^0.0.6",
 		"@types/node": "^10.0.0",
 		"requirejs": "2.3.6",
 		"typedoc": "0.14.2",
