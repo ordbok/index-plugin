@@ -3,17 +3,11 @@
 /* Licensed under the MIT License. See the LICENSE file in the project root. */
 /*---------------------------------------------------------------------------*/
 
-import { Ajax, Utilities } from '@ordbok/core';
-
-/* *
- *
- *  Constants
- *
- * */
-
-const LINE_SEPARATOR = '\n';
-
-const PAIR_SEPARATOR = ':';
+import {
+    Ajax,
+    Utilities,
+    Dictionary
+} from '@ordbok/core';
 
 /* *
  *
@@ -41,14 +35,9 @@ export class Index extends Ajax {
 
     /* *
      *
-     *  Static Variables
+     *  Static Properties
      *
      * */
-
-    /**
-     * File extension of index files
-     */
-    public static readonly FILE_EXTENSION = '.txt';
 
     /**
      * Subfolder of index files
@@ -74,14 +63,14 @@ export class Index extends Ajax {
         let pair: Array<string>;
 
         stringified
-            .split(LINE_SEPARATOR)
+            .split(Dictionary.LINE_SEPARATOR)
             .forEach(line => {
 
-                if (line.indexOf(PAIR_SEPARATOR) === -1) {
+                if (line.indexOf(Dictionary.PAIR_SEPARATOR) === -1) {
                     return;
                 }
 
-                pair = line.split(PAIR_SEPARATOR);
+                pair = line.split(Dictionary.PAIR_SEPARATOR);
 
                 if (pair.length < 2) {
                     return;
@@ -103,10 +92,12 @@ export class Index extends Ajax {
 
         return Object
             .keys(fileIndex)
-            .map(fileTarget => (
-                Utilities.getKey(fileTarget) + PAIR_SEPARATOR + fileIndex[fileTarget]
-            ))
-            .join(LINE_SEPARATOR);
+            .map(fileTarget =>
+                Utilities.getKey(fileTarget) +
+                Dictionary.PAIR_SEPARATOR +
+                fileIndex[fileTarget]
+            )
+            .join(Dictionary.LINE_SEPARATOR);
     }
 
     /**
@@ -117,7 +108,7 @@ export class Index extends Ajax {
      */
     public static stringifyHeadlines(headlines: Array<string>): string {
 
-        return headlines.join(LINE_SEPARATOR);
+        return headlines.join(Dictionary.LINE_SEPARATOR);
     }
 
     /* *
@@ -138,9 +129,9 @@ export class Index extends Ajax {
      * @param responseTimeout
      *        Time in milliseconds to wait for a server response
      */
-    public constructor (baseUrl?: string, cacheTimeout?: number, responseTimeout?: number) {
+    public constructor (baseUrl: string = '', cacheTimeout?: number, responseTimeout?: number) {
 
-        super((baseUrl || '') + Index.SUBFOLDER, cacheTimeout, responseTimeout);
+        super((baseUrl + Index.SUBFOLDER), cacheTimeout, responseTimeout);
     }
 
     /* *
@@ -155,7 +146,7 @@ export class Index extends Ajax {
     public loadHeadlines (): Promise<Array<string>> {
 
         return this
-            .request('index' + Index.FILE_EXTENSION)
+            .request('index' + Dictionary.FILE_EXTENSION)
             .then(response => {
 
                 if (response instanceof Error ||
@@ -164,7 +155,7 @@ export class Index extends Ajax {
                     throw new Error('HTTP ' + response.serverStatus);
                 }
 
-                return response.result.split(LINE_SEPARATOR);
+                return response.result.split(Dictionary.LINE_SEPARATOR);
             });
     }
 
@@ -177,7 +168,7 @@ export class Index extends Ajax {
     public loadFileIndex (headline: string): Promise<IFileIndex> {
 
         return this
-            .request(Utilities.getKey(headline) + Index.FILE_EXTENSION)
+            .request(Utilities.getKey(headline) + Dictionary.FILE_EXTENSION)
             .then(response => {
 
                 if (response instanceof Error ||

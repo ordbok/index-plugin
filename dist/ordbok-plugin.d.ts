@@ -1,5 +1,4 @@
-import { IMarkdownPage } from '@ordbok/core';
-import { IPlugin } from '@ordbok/core/dist/plugin';
+import { IMarkdownPage, IPlugin } from '@ordbok/core/dist';
 /**
  * Plugin to create index files.
  */
@@ -30,10 +29,6 @@ export declare class IndexPlugin implements IPlugin {
      *        Dictionary folder
      */
     onAssembling(sourceFolder: string, targetFolder: string): void;
-    /**
-     * Gets called after a markdown file has been read.
-     */
-    onReadFile(): void;
     /**
      * Gets called before a dictionary file will be written.
      *

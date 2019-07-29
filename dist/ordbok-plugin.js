@@ -5,8 +5,7 @@
 /*---------------------------------------------------------------------------*/
 Object.defineProperty(exports, "__esModule", { value: true });
 var Path = require("path");
-var core_1 = require("@ordbok/core");
-var plugin_1 = require("@ordbok/core/dist/plugin");
+var dist_1 = require("@ordbok/core/dist");
 var lib_1 = require("./lib");
 /* *
  *
@@ -31,7 +30,7 @@ var IndexPlugin = /** @class */ (function () {
     }
     /* *
      *
-     *  Functions
+     *  Events
      *
      * */
     /**
@@ -44,9 +43,8 @@ var IndexPlugin = /** @class */ (function () {
         }
         var headlineKeys = Object.keys(indexes);
         var targetFolder = this._targetFolder;
-        var filePath;
-        plugin_1.PluginUtilities.writeFileSync((Path.join(targetFolder, 'index') + lib_1.Index.FILE_EXTENSION), lib_1.Index.stringifyHeadlines(headlineKeys.map(function (headlineKey) { return indexes[headlineKey].headline; })));
-        headlineKeys.forEach(function (headline) { return plugin_1.PluginUtilities.writeFileSync((Path.join(targetFolder, headline) + lib_1.Index.FILE_EXTENSION), lib_1.Index.stringify(indexes[headline].fileIndex)); });
+        dist_1.Internals.writeFile((Path.join(targetFolder, 'index') + dist_1.Dictionary.FILE_EXTENSION), lib_1.Index.stringifyHeadlines(headlineKeys.map(function (headlineKey) { return indexes[headlineKey].headline; })));
+        headlineKeys.forEach(function (headline) { return dist_1.Internals.writeFile((Path.join(targetFolder, headline) + dist_1.Dictionary.FILE_EXTENSION), lib_1.Index.stringify(indexes[headline].fileIndex)); });
     };
     /**
      * Gets called before the assembling begins.
@@ -61,12 +59,6 @@ var IndexPlugin = /** @class */ (function () {
         this._targetFolder = Path.join(targetFolder, lib_1.Index.SUBFOLDER);
     };
     /**
-     * Gets called after a markdown file has been read.
-     */
-    IndexPlugin.prototype.onReadFile = function () {
-        // nothing to do
-    };
-    /**
      * Gets called before a dictionary file will be written.
      *
      * @param targetFile
@@ -78,7 +70,7 @@ var IndexPlugin = /** @class */ (function () {
     IndexPlugin.prototype.onWriteFile = function (targetFile, markdownPage) {
         var _this = this;
         targetFile = Path.basename(targetFile);
-        var lastDashPosition = targetFile.lastIndexOf('-');
+        var lastDashPosition = targetFile.lastIndexOf(dist_1.Dictionary.FILE_SEPARATOR);
         if (lastDashPosition === -1) {
             return;
         }
@@ -89,7 +81,7 @@ var IndexPlugin = /** @class */ (function () {
         Object
             .keys(markdownPage)
             .forEach(function (headline) {
-            headlineKey = core_1.Utilities.getKey(headline);
+            headlineKey = dist_1.Utilities.getKey(headline);
             headlineEntry = _this._indexes[headlineKey];
             if (!headlineEntry) {
                 headlineEntry = _this._indexes[headlineKey] = {

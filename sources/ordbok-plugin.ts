@@ -4,9 +4,17 @@
 /*---------------------------------------------------------------------------*/
 
 import * as Path from 'path';
-import { IMarkdownPage, Utilities } from '@ordbok/core';
-import { IPlugin, PluginUtilities } from '@ordbok/core/dist/plugin';
-import { IFileIndex, Index } from './lib';
+import {
+    Dictionary,
+    IMarkdownPage,
+    Internals,
+    IPlugin,
+    Utilities
+} from '@ordbok/core/dist';
+import {
+    IFileIndex,
+    Index
+} from './lib';
 
 /* *
  *
@@ -73,7 +81,7 @@ export class IndexPlugin implements IPlugin {
 
     /* *
      *
-     *  Functions
+     *  Events
      *
      * */
 
@@ -89,20 +97,17 @@ export class IndexPlugin implements IPlugin {
         }
 
         const headlineKeys = Object.keys(indexes);
-
         const targetFolder = this._targetFolder;
 
-        let filePath: string;
-
-        PluginUtilities.writeFileSync(
-            (Path.join(targetFolder, 'index') + Index.FILE_EXTENSION),
+        Internals.writeFile(
+            (Path.join(targetFolder, 'index') + Dictionary.FILE_EXTENSION),
             Index.stringifyHeadlines(
                 headlineKeys.map(headlineKey => indexes[headlineKey].headline)
             )
         );
 
-        headlineKeys.forEach(headline => PluginUtilities.writeFileSync(
-            (Path.join(targetFolder, headline) + Index.FILE_EXTENSION),
+        headlineKeys.forEach(headline => Internals.writeFile(
+            (Path.join(targetFolder, headline) + Dictionary.FILE_EXTENSION),
             Index.stringify(indexes[headline].fileIndex)
         ));
     }
@@ -122,14 +127,6 @@ export class IndexPlugin implements IPlugin {
     }
 
     /**
-     * Gets called after a markdown file has been read.
-     */
-    public onReadFile (): void {
-
-        // nothing to do
-    }
-
-    /**
      * Gets called before a dictionary file will be written.
      *
      * @param targetFile
@@ -142,7 +139,7 @@ export class IndexPlugin implements IPlugin {
 
         targetFile = Path.basename(targetFile);
 
-        const lastDashPosition = targetFile.lastIndexOf('-');
+        const lastDashPosition = targetFile.lastIndexOf(Dictionary.FILE_SEPARATOR);
 
         if (lastDashPosition === -1) {
             return;

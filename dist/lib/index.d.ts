@@ -10,10 +10,6 @@ export interface IFileIndex {
  */
 export declare class Index extends Ajax {
     /**
-     * File extension of index files
-     */
-    static readonly FILE_EXTENSION = ".txt";
-    /**
      * Subfolder of index files
      */
     static readonly SUBFOLDER = "index/";
