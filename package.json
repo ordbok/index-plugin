@@ -36,7 +36,7 @@
 		"build-3": "typedoc --out docs --tsconfig tsconfig-docs.json",
 		"clean": "rm -rf dist docs",
 		"release": "npm publish --access=public --tag next",
-		"release-as-stable": "npm publish --access=public",
+		"release-as-stable": "npm run release && npm publish --access=public",
 		"watch": "tsc --build tsconfig.json --watch"
 	},
 	"types": "dist/lib/index.d.ts"
