@@ -1,7 +1,7 @@
 ({
     generateSourceMaps: true,
     name: "@ordbok/index-plugin",
-    out: "dist/client.js",
+    out: "dist/client/ordbok-index-plugin.js",
     exclude: [
         "@ordbok/core"
     ],
@@ -12,6 +12,6 @@
     }, {
         name: "@ordbok/index-plugin",
         main: "index",
-        location: 'dist/client'
+        location: 'dist/client/ordbok-index-plugin'
     }]
 })
