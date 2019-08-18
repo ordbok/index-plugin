@@ -8,7 +8,7 @@
     packages: [{
         name: "@ordbok/core",
         main: "index",
-        location: 'node_modules/@ordbok/core/dist/client'
+        location: 'node_modules/@ordbok/core/dist/client/ordbok-core'
     }, {
         name: "@ordbok/index-plugin",
         main: "index",
