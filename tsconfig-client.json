@@ -4,7 +4,7 @@
         "declaration": false,
         "sourceMap": true,
         "module": "amd",
-        "outDir": "dist/client",
+        "outDir": "dist/client/ordbok-index-plugin",
         "rootDir": "sources/lib"
     },
     "include": [

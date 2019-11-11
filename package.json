@@ -1,42 +1,46 @@
 {
-	"private": true,
-	"name": "@ordbok/index-plugin",
-	"version": "0.0.3",
-	"author": "ORDBOK contributors",
-	"license": "MIT",
-	"description": "Dictionary plugin to create a file index",
-	"keywords": [
-		"dictionary",
-		"ordbok"
-	],
-	"bugs": "https://github.com/ordbok/index-plugin/issues",
-	"homepage": "https://github.com/ordbok/index-plugin#readme",
-	"repository": "https://github.com/ordbok/index-plugin.git",
-	"devDependencies": {
-		"@ordbok/core": "^0.0.7",
-		"@types/node": "^10.0.0",
-		"requirejs": "2.3.6",
-		"typedoc": "0.14.2",
-		"typescript": "3.4.5"
-	},
-	"engines": {
-		"node": ">=10.0.0"
-	},
-	"files": [
-		"dist",
-		"LICENSE",
-		"README.md"
-	],
-	"main": "dist/lib/index.js",
-	"scripts": {
-		"build": "npm run clean && npm run build-1 && npm run build-2 && npm run build-3",
-		"build-1": "tsc --build tsconfig.json tsconfig-client.json",
-		"build-2": "r_js -o rjsconfig-client.js",
-		"build-3": "typedoc --excludeExternals --excludeNotExported --excludePrivate --excludeProtected --gitRevision master --mode file --name \"ORDBOK Index Plugin API\" --out docs --tsconfig tsconfig-client.json",
-		"clean": "rm -rf dist docs",
-		"release": "npm publish --access=public --tag next",
-		"release-as-stable": "npm publish --access=public",
-		"watch": "tsc --build tsconfig.json --watch"
-	},
-	"types": "dist/lib/index.d.ts"
+    "private": true,
+    "name": "@ordbok/index-plugin",
+    "version": "0.0.4",
+    "author": "ORDBOK contributors",
+    "license": "MIT",
+    "description": "Dictionary plugin to create a file index",
+    "keywords": [
+        "dictionary",
+        "ordbok"
+    ],
+    "bugs": "https://github.com/ordbok/index-plugin/issues",
+    "homepage": "https://github.com/ordbok/index-plugin#readme",
+    "repository": "https://github.com/ordbok/index-plugin.git",
+    "devDependencies": {
+        "@ordbok/core": "v0.0.8",
+        "@ordbok/typedoc-theme": "^0.5.0",
+        "@types/node": "^10.0.0",
+        "requirejs": "2.3.6",
+        "typedoc": "~0.15.0",
+        "typescript": "~3.6.4"
+    },
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "peerDependencies": {
+        "@ordbok/core": ">=0.0.8"
+    },
+    "files": [
+        "dist",
+        "LICENSE",
+        "README.md"
+    ],
+    "main": "dist/lib/index.js",
+    "scripts": {
+        "build": "npm run clean && npm run build-1 && npm run build-2 && npm run build-3",
+        "build-1": "tsc --build tsconfig.json tsconfig-client.json",
+        "build-2": "r_js -o rjsconfig-client.js",
+        "build-3": "typedoc --out docs --tsconfig tsconfig-docs.json",
+        "clean": "rm -rf dist docs",
+        "release": "npm publish --access=public --tag next",
+        "release-as-stable": "npm run release && npm publish --access=public",
+        "watch": "tsc --build tsconfig.json --watch"
+    },
+    "types": "dist/lib/index.d.ts"
 }
