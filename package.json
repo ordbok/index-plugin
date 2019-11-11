@@ -13,12 +13,12 @@
     "homepage": "https://github.com/ordbok/index-plugin#readme",
     "repository": "https://github.com/ordbok/index-plugin.git",
     "devDependencies": {
-        "@ordbok/core": "github:ordbok/core#v0.0.8",
+        "@ordbok/core": "v0.0.8",
         "@ordbok/typedoc-theme": "^0.5.0",
         "@types/node": "^10.0.0",
         "requirejs": "2.3.6",
-        "typedoc": "0.14.2",
-        "typescript": "3.4.5"
+        "typedoc": "~0.15.0",
+        "typescript": "~3.6.4"
     },
     "engines": {
         "node": ">=10.0.0"
