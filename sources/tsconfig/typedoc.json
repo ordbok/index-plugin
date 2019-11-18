@@ -1,24 +1,22 @@
 {
-    "extends": "./tsconfig.json",
+    "extends": "../tsconfig.json",
     "compilerOptions": {
-        "declaration": false,
-        "module": "amd",
-        "outDir": "dist/client",
-        "rootDir": "sources/lib"
+        "noEmit": true
     },
     "include": [
-        "sources/lib/**/*.ts"
+        "../index.ts",
+        "../lib/**/*.ts"
     ],
     "typedocOptions": {
         "excludeExternals": true,
         "excludeNotExported": true,
         "excludePrivate": true,
         "excludeProtected": true,
-        "gitRevision": "master",
         "includeDeclarations": true,
+        "gitRevision": "master",
         "mode": "file",
         "name": "ORDBOK Index Plugin API",
         "plugin": "none",
-        "theme": "node_modules/@ordbok/typedoc-theme/bin/ordbok"
+        "theme": "../../node_modules/@ordbok/typedoc-theme/bin/ordbok"
     }
 }
