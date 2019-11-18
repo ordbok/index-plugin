@@ -1,46 +1,50 @@
 {
     "private": true,
-    "name": "@ordbok/index-plugin",
-    "version": "0.0.4",
     "author": "ORDBOK contributors",
-    "license": "MIT",
-    "description": "Dictionary plugin to create a file index",
-    "keywords": [
-        "dictionary",
-        "ordbok"
-    ],
     "bugs": "https://github.com/ordbok/index-plugin/issues",
+    "description": "Dictionary plugin to create a file index",
     "homepage": "https://github.com/ordbok/index-plugin#readme",
+    "license": "MIT",
+    "name": "@ordbok/index-plugin",
+    "main": "index.js",
     "repository": "https://github.com/ordbok/index-plugin.git",
+    "types": "index.d.ts",
+    "version": "0.1.0",
     "devDependencies": {
-        "@ordbok/core": "v0.0.8",
-        "@ordbok/typedoc-theme": "^0.5.0",
+        "@ordbok/core": "~0.1.0",
+        "@ordbok/typedoc-theme": "~0.6.0",
         "@types/node": "^10.0.0",
-        "requirejs": "2.3.6",
-        "typedoc": "~0.15.0",
-        "typescript": "~3.6.4"
+        "browserify": "^16.5.0",
+        "typedoc": "~0.15.2",
+        "typescript": "~3.7.2"
     },
     "engines": {
         "node": ">=10.0.0"
     },
-    "peerDependencies": {
-        "@ordbok/core": ">=0.0.8"
-    },
     "files": [
-        "dist",
+        "client/",
+        "lib/",
+        "index.d.ts",
+        "index.js",
         "LICENSE",
+        "ordbok-plugin.js",
         "README.md"
     ],
-    "main": "dist/lib/index.js",
+    "keywords": [
+        "dictionary",
+        "ordbok"
+    ],
+    "peerDependencies": {
+        "@ordbok/core": ">=0.1.0"
+    },
     "scripts": {
         "build": "npm run clean && npm run build-1 && npm run build-2 && npm run build-3",
-        "build-1": "tsc --build tsconfig.json tsconfig-client.json",
-        "build-2": "r_js -o rjsconfig-client.js",
-        "build-3": "typedoc --out docs --tsconfig tsconfig-docs.json",
-        "clean": "rm -rf dist docs",
+        "build-1": "tsc --build sources/tsconfig/*.json",
+        "build-2": "browserify --outfile client/ordbok-index-plugin.js --standalone OrdbokIndexPlugin index.js",
+        "build-3": "cd sources/tsconfig && typedoc --out ../../docs --tsconfig typedoc.json",
+        "clean": "rm -rf $(< .clean)",
         "release": "npm publish --access=public --tag next",
         "release-as-stable": "npm run release && npm publish --access=public",
-        "watch": "tsc --build tsconfig.json --watch"
-    },
-    "types": "dist/lib/index.d.ts"
+        "watch": "tsc --build sources/tsconfig/*.json --watch"
+    }
 }

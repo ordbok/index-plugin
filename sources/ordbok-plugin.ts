@@ -7,10 +7,12 @@ import * as Path from 'path';
 import {
     Dictionary,
     IMarkdownPage,
+    Utilities
+} from '@ordbok/core';
+import {
     Internals,
     IPlugin,
-    Utilities
-} from '@ordbok/core/dist';
+} from '@ordbok/core/lib/internals';
 import {
     IFileIndex,
     Index
