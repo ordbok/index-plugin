@@ -95,14 +95,8 @@ var Index = (function (_super) {
 exports.Index = Index;
 
 },{"@ordbok/core":3}],3:[function(require,module,exports){
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./lib"));
-
-},{"./lib":6}],4:[function(require,module,exports){
+arguments[4][1][0].apply(exports,arguments)
+},{"./lib":6,"dup":1}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Ajax = (function () {
