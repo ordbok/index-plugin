@@ -11,7 +11,7 @@
     "types": "index.d.ts",
     "version": "0.1.1",
     "devDependencies": {
-        "@ordbok/core": "github:ordbok/core#v0.1.1",
+        "@ordbok/core": "~0.1.1",
         "@ordbok/typedoc-theme": "~0.6.0",
         "@types/node": "^10.0.0",
         "browserify": "^16.5.0",
