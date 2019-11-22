@@ -9,9 +9,9 @@
     "main": "index.js",
     "repository": "https://github.com/ordbok/index-plugin.git",
     "types": "index.d.ts",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "devDependencies": {
-        "@ordbok/core": "~0.1.0",
+        "@ordbok/core": "~0.1.1",
         "@ordbok/typedoc-theme": "~0.6.0",
         "@types/node": "^10.0.0",
         "browserify": "^16.5.0",
@@ -35,7 +35,7 @@
         "ordbok"
     ],
     "peerDependencies": {
-        "@ordbok/core": ">=0.1.0"
+        "@ordbok/core": ">=0.1.1"
     },
     "scripts": {
         "build": "npm run clean && npm run build-1 && npm run build-2 && npm run build-3",
@@ -44,7 +44,7 @@
         "build-3": "cd sources/tsconfig && typedoc --out ../../docs --tsconfig typedoc.json",
         "clean": "rm -rf $(< .clean)",
         "release": "npm publish --access=public --tag next",
-        "release-as-stable": "npm run release && npm publish --access=public",
+        "release-as-stable": "npm publish --access=public",
         "watch": "tsc --build sources/tsconfig/*.json --watch"
     }
 }

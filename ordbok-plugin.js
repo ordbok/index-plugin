@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Path = require("path");
-var core_1 = require("@ordbok/core");
-var internals_1 = require("@ordbok/core/lib/internals");
+var internals_1 = require("@ordbok/core/internals");
 var lib_1 = require("./lib");
 var IndexPlugin = (function () {
     function IndexPlugin() {
@@ -16,8 +15,8 @@ var IndexPlugin = (function () {
         }
         var headlineKeys = Object.keys(indexes);
         var targetFolder = this._targetFolder;
-        internals_1.Internals.writeFile((Path.join(targetFolder, 'index') + core_1.Dictionary.FILE_EXTENSION), lib_1.Index.stringifyHeadlines(headlineKeys.map(function (headlineKey) { return indexes[headlineKey].headline; })));
-        headlineKeys.forEach(function (headline) { return internals_1.Internals.writeFile((Path.join(targetFolder, headline) + core_1.Dictionary.FILE_EXTENSION), lib_1.Index.stringify(indexes[headline].fileIndex)); });
+        internals_1.Internals.writeFile((Path.join(targetFolder, 'index') + internals_1.Dictionary.FILE_EXTENSION), lib_1.Index.stringifyHeadlines(headlineKeys.map(function (headlineKey) { return indexes[headlineKey].headline; })));
+        headlineKeys.forEach(function (headline) { return internals_1.Internals.writeFile((Path.join(targetFolder, headline) + internals_1.Dictionary.FILE_EXTENSION), lib_1.Index.stringify(indexes[headline].fileIndex)); });
     };
     IndexPlugin.prototype.onAssembling = function (sourceFolder, targetFolder) {
         this._targetFolder = Path.join(targetFolder, lib_1.Index.SUBFOLDER);
@@ -25,7 +24,7 @@ var IndexPlugin = (function () {
     IndexPlugin.prototype.onWriteFile = function (targetFile, markdownPage) {
         var _this = this;
         targetFile = Path.basename(targetFile);
-        var lastDashPosition = targetFile.lastIndexOf(core_1.Dictionary.FILE_SEPARATOR);
+        var lastDashPosition = targetFile.lastIndexOf(internals_1.Dictionary.FILE_SEPARATOR);
         if (lastDashPosition === -1) {
             return;
         }
@@ -36,7 +35,7 @@ var IndexPlugin = (function () {
         Object
             .keys(markdownPage)
             .forEach(function (headline) {
-            headlineKey = core_1.Utilities.getKey(headline);
+            headlineKey = internals_1.Utilities.getKey(headline);
             headlineEntry = _this._indexes[headlineKey];
             if (!headlineEntry) {
                 headlineEntry = _this._indexes[headlineKey] = {
