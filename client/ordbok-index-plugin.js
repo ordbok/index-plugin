@@ -91,7 +91,7 @@ var Index = (function (_super) {
     };
     Index.SUBFOLDER = 'index/';
     return Index;
-}(core_1.Ajax));
+}(core_1.AJAX));
 exports.Index = Index;
 
 },{"@ordbok/core":"@ordbok/core"}]},{},[1])(1)
