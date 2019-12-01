@@ -1,4 +1,4 @@
-import { Ajax } from '@ordbok/core';
+import { AJAX } from '@ordbok/core';
 /**
  * File index with highest page index
  */
@@ -8,7 +8,7 @@ export interface IFileIndex {
 /**
  * Manages index communication with a server
  */
-export declare class Index extends Ajax {
+export declare class Index extends AJAX {
     /**
      * Subfolder of index files
      */

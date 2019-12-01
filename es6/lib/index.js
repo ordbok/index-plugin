@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { Ajax, Utilities, Dictionary } from '@ordbok/core';
+import { AJAX, Utilities, Dictionary } from '@ordbok/core';
 var Index = (function (_super) {
     __extends(Index, _super);
     function Index(baseUrl, cacheTimeout, responseTimeout) {
@@ -76,5 +76,5 @@ var Index = (function (_super) {
     };
     Index.SUBFOLDER = 'index/';
     return Index;
-}(Ajax));
+}(AJAX));
 export { Index };

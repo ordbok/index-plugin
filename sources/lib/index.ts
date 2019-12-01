@@ -4,7 +4,7 @@
 /*---------------------------------------------------------------------------*/
 
 import {
-    Ajax,
+    AJAX,
     Utilities,
     Dictionary
 } from '@ordbok/core';
@@ -31,7 +31,7 @@ export interface IFileIndex {
 /**
  * Manages index communication with a server
  */
-export class Index extends Ajax {
+export class Index extends AJAX {
 
     /* *
      *
